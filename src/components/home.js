@@ -111,7 +111,8 @@ const useStyles = makeStyles((theme) => ({
     minHeight:'100vh',
     display:'flex',
     alignItems:"center",
-    justifyContent:'center'
+    justifyContent:'center',
+    padding:'4rem'
   },
 }));
 
