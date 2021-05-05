@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Home from './components/home'
+import Home from './Pages/Home'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles';

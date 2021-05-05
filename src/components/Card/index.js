@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import FlagIcon from '@material-ui/icons/Flag';
 import Button from '@material-ui/core/Button';
-import ConCardMenu from './ConCardMenu';
+import ConCardMenu from './CardMenu';
 
 const useStyles = makeStyles((theme) => ({
   root: {

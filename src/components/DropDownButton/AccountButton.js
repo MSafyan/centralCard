@@ -8,6 +8,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Divider from '@material-ui/core/Divider';
+
+
+import {ThemeContext} from '../../themeContext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
   toolbarButton:{
     color:'white'
   },
+  NavLinks:{
+    [theme.breakpoints.up('md')]: {
+      width: 0,
+      display:'none',
+    },
+  },
 }));
 
 const AccountButton = () => {
@@ -26,10 +36,14 @@ const AccountButton = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
+  const {themeColor,setThemeColor}=React.useContext(ThemeContext);
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-
+  const onClick=()=>{
+    setThemeColor(!themeColor);
+  }
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -51,7 +65,6 @@ const AccountButton = () => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
   return (
@@ -75,6 +88,10 @@ const AccountButton = () => {
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <Divider />
+              <MenuItem className={classes.NavLinks} onClick={handleClose}>HQM</MenuItem>
+              <MenuItem  onClick={onClick}>{themeColor? 'Light':'Dark'} Mode</MenuItem>
+              <MenuItem onClick={handleClose}>Support</MenuItem>
             </MenuList>
           </ClickAwayListener>
         </Paper>

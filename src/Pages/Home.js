@@ -15,16 +15,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import ConCard from './ConCard'
+import ConCard from '../components/Card'
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
-import {ThemeContext} from '../themeContext';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Container from '@material-ui/core/Container'
+import {ThemeContext} from '../themeContext';
 
 //components
-import AccountButton from './AccountButton'
-import HQButton from './HQButton';
+import AccountButton from '../components/DropDownButton/AccountButton'
+import HQButton from '../components/DropDownButton/HQButton';
 
 const drawerWidth = 240;
 
@@ -46,18 +46,49 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    [theme.breakpoints.down('xs')]: {
+      display:'none'
+    }
+
   },
   menuButton: {
-    marginRight: 36,
+    [theme.breakpoints.up('md')]: {
+      marginRight: 36,
+    }
+
   },
   hide: {
-    display: 'none',
+    display: 'none !important',
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap'
   },
+  drawerPaperClose: {
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+}),
+width: theme.spacing.unit * 7,
+[theme.breakpoints.up('sm')]: {
+  width: theme.spacing.unit * 9,
+},
+[theme.breakpoints.down('sm')]: {
+  width: 0,
+  display:'none',
+},
+},
+NavLinks:{
+  [theme.breakpoints.down('sm')]: {
+    width: 0,
+    display:'none',
+  },
+},
+nested: {
+paddingLeft: theme.spacing.unit * 4,
+},
   drawerOpen: {
     width: drawerWidth,
     // color:'white',
@@ -105,15 +136,31 @@ const useStyles = makeStyles((theme) => ({
     display:'flex'
   },
   toolbarButton:{
-    color:'white'
+    color:'white',
+    [theme.breakpoints.down('sm')]: {
+      width: 0,
+      display:'none',
+    },
+  },
+  toolbarButtonUnhidden:{
+    color:'white',
+    [theme.breakpoints.up('md')]: {
+      minWidth:"0px",
+      padding:'0px'
+    },
   },
   content: {
     minHeight:'100vh',
     display:'flex',
     alignItems:"center",
     justifyContent:'center',
-    padding:'4rem'
+    paddingTop:'4rem'
   },
+  hideCard:{
+    [theme.breakpoints.down('xs')]: {
+      display:"none !important"
+    }
+  }
 }));
 
 export default function MiniDrawer() {
@@ -155,8 +202,8 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
+          <Typography variant="h5" noWrap>
+            LOGO
           </Typography>
           </div>
           <div className={classes.rightToolbar}>
@@ -177,7 +224,7 @@ export default function MiniDrawer() {
         variant="permanent"
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerPaperClose]: !open,
         })}
         classes={{
           paper: clsx({
@@ -211,7 +258,9 @@ export default function MiniDrawer() {
         </List>
       </Drawer>
         <Container>
-      <main className={classes.content}>
+      <main className={clsx(classes.content, {
+              [classes.hideCard]: open,
+            })} >
         <ConCard/>
       </main>
         </Container>
