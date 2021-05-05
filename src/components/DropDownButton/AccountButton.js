@@ -88,10 +88,10 @@ const AccountButton = () => {
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem onClick={handleClose}>Logout</MenuItem>
-              <Divider />
+              <Divider className={classes.NavLinks}/>
               <MenuItem className={classes.NavLinks} onClick={handleClose}>HQM</MenuItem>
-              <MenuItem  onClick={onClick}>{themeColor? 'Light':'Dark'} Mode</MenuItem>
-              <MenuItem onClick={handleClose}>Support</MenuItem>
+              <MenuItem className={classes.NavLinks} onClick={onClick}>{themeColor? 'Light':'Dark'} Mode</MenuItem>
+              <MenuItem className={classes.NavLinks} onClick={handleClose}>Support</MenuItem>
             </MenuList>
           </ClickAwayListener>
         </Paper>
